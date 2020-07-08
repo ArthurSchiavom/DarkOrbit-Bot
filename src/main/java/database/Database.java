@@ -1,12 +1,12 @@
 package database;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import main.Ref;
 
 public class Database {
@@ -37,6 +37,7 @@ public class Database {
 			try {
 				conn = DriverManager.getConnection("jdbc:mysql://" + Ref.databaseUrl + "/" + Ref.databaseName, Ref.databaseUsername, Ref.databasePassword);
 			} catch (Exception e) {
+				conn = null;
 				main.ErrorMessenger.inform("**Failed to open connection to the database**");
 				if (Ref.databaseUrl.isEmpty()) {
 					main.ErrorMessenger.inform("Please fill in the database url into config.txt");
@@ -97,7 +98,7 @@ public class Database {
 	 * <b>Column examples:</b> <br/>
 	 * channelID bigint <br/>
 	 * name varchar(2000)
-	 * @param columns The columns that the table will have.
+	 * @param columns The columns that the table will have. In the order that they should be.
 	 */
 	public static void createTable(String tableName, String[] columns) {
 		Connection connection = Database.getConnection();

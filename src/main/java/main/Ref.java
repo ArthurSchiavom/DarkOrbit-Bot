@@ -7,15 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import RSSFeed.FeedChannels;
+import sales.AccountSeller;
 import userListeners.ChannelMirror;
 
 public class Ref {
-	public static String commandsPrefix = "!";
+	public static ChannelMirror channelMirror = new ChannelMirror();
 	public static multiQuestion.Questioner questioner = new multiQuestion.Questioner();
+	public static AccountSeller accSeller = new AccountSeller();
+	
+	public static String commandsPrefix = "!";
 	public static String timezone = "Etc/GMT";
 	public static String botToken = "";
 	public static String userToken = "";
-	public static ChannelMirror channelMirror = new ChannelMirror();
 	public static String game = "";
 	public static List<Long> suggestionChannelsIDs = new ArrayList<Long>();
 	public static List<String> reactionEmotes = new ArrayList<String>();
@@ -40,7 +43,17 @@ public class Ref {
 	public static String votingEmbedThumbnail = "";
 	public static Color suggestionEmbedColor = Color.decode("#2CF68A");
 	public static Color helpMessageEmbedColor = Color.decode("#2CF68A");
-	public static String helpMessageEmbedFooterImageUrl = "https://c1.staticflickr.com/1/858/43641846732_0096c5df33_m_d.jpg";
+	public static String helpMessageEmbedFooterImageUrl = "https://i.imgur.com/GJp5jui.png";
+	public static long salesChannelID = -1;
+	public static long tradesChannelID = -1;
+	public static Color salesEmbedColor = Color.decode("#2CF68A");
+	public static Color tradesEmbedColor = Color.decode("#2CF68A");
+	public static String salesEmbedFooterImageUrl = "https://i.imgur.com/8P6y2Ih.png";
+	public static String tradesEmbedFooterImageUrl = "https://i.imgur.com/d4pUz31.png";
+	public static long logChannelID = -1;
+	public static long streamingRoleID = -1;
+	
+	
 	
 	/** Loads the reference variables */
 	public static void loadRef() {
@@ -138,6 +151,30 @@ public class Ref {
 						break;
 					case "helpmessageembedfooterimageurl":
 						helpMessageEmbedFooterImageUrl = config[1];
+						break;
+					case "saleschannel":
+						salesChannelID = Long.parseLong(config[1]);
+						break;
+					case "tradeschannel":
+						tradesChannelID = Long.parseLong(config[1]);
+						break;
+					case "salesembedcolor":
+						salesEmbedColor = Color.decode(config[1]);
+						break;
+					case "tradesembedcolor":
+						tradesEmbedColor = Color.decode(config[1]);
+						break;
+					case "salesfooterimageurl":
+						salesEmbedFooterImageUrl = config[1];
+						break;
+					case "tradesfooterimageurl":
+						tradesEmbedFooterImageUrl = config[1];
+						break;
+					case "logchannelid":
+						logChannelID = Long.parseLong(config[1]);
+						break;
+					case "streamingroleid":
+						streamingRoleID = Long.parseLong(config[1]);
 					}
 				}
 			}

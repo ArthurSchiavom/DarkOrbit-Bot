@@ -20,15 +20,14 @@ public class Help extends Command {
 		String message = event.getMessage().getContentRaw();
 		int helpCommandLenght = getName().length() + Ref.commandsPrefix.length();
 		if (helpCommandLenght == message.trim().length()) {
-			
-		}
-		else {
-		String command = message.substring(helpCommandLenght).trim().toLowerCase();
-		MessageEmbed helpMessage = helper.getHelp(command);
-		if (helpMessage != null)
-			event.getChannel().sendMessage(helpMessage).queue();
-		else
-			event.getChannel().sendMessage("The command **" + command + "** does not exist.").queue();
+			event.getChannel().sendMessage(helper.getMainHelp()).queue();
+		} else {
+			String command = message.substring(helpCommandLenght).trim().toLowerCase();
+			MessageEmbed helpMessage = helper.getHelp(command);
+			if (helpMessage != null)
+				event.getChannel().sendMessage(helpMessage).queue();
+			else
+				event.getChannel().sendMessage("The command **" + command + "** does not exist.").queue();
 		}
 	}
 }

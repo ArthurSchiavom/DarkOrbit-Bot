@@ -24,6 +24,7 @@ public abstract class Command {
 	public static final int USERTYPE_OWNER = 2;
 	private int userType = -1;
 	
+	private String[] aliases = null;
 	private String description = "";
 	private String usage = "";
 	private List<CommandHelp> subcommandsHelp = new ArrayList<CommandHelp>();
@@ -83,6 +84,7 @@ public abstract class Command {
 	}
 	
 	protected void setAliases(String[] aliases) {
+		this.aliases = aliases;
 		for (String alias : aliases)
 			Executer.addAlias(alias.toLowerCase(), name);
 		
@@ -140,21 +142,28 @@ public abstract class Command {
 		eb.setFooter("Type " + Ref.commandsPrefix + "help [command] [subcommand] to see obtain help on a specific subcommand, if any.", Ref.helpMessageEmbedFooterImageUrl);
 		if (!usage.isEmpty())
 			eb.addField("Usage", usage, false);
-		
-		boolean first = true;
-		for (CommandHelp subcommandHelp : subcommandsHelp) {
-			String subcommandName = subcommandHelp.getName();
-			Helper.addCommand(name + " " + subcommandName, subcommandHelp.getEmbed());
-			if (first) {
-				description = description.concat("\n\n**Subcommands**");
-				first = false;
-			}
-			description = description.concat("\n`" + Ref.commandsPrefix + name + " " + subcommandName + "` - " + subcommandHelp.getDescription());
-		}
 		if (!description.isEmpty())
 			eb.setDescription(description);
 		
-		Helper.addCommand(name, eb.build());
+		String subcommandsHelpMessage = "";
+		for (CommandHelp subcommandHelp : subcommandsHelp) {
+			String subcommandName = subcommandHelp.getName();
+			Helper.addCommand(name + " " + subcommandName, subcommandHelp.getEmbed(), true);
+			
+			subcommandsHelpMessage = subcommandsHelpMessage + "\n`" + Ref.commandsPrefix + name + " " + subcommandName + "` - " + subcommandHelp.getDescription();
+		}
+		if (!subcommandsHelpMessage.isEmpty())
+			eb.addField("Subcommands", subcommandsHelpMessage, false);
+		
+		if (aliases != null) {
+			String aliases = "`" + this.aliases[0] + "`";
+			for (int i = 1; i<this.aliases.length; i++)
+				aliases = aliases + ", `" + this.aliases[i] + "`";
+			
+			eb.addField("Aliases", aliases, false);
+		}
+		
+		Helper.addCommand(name, eb.build(), false);
 	}
 	
 	/**
@@ -175,5 +184,29 @@ public abstract class Command {
 	 */
 	protected void setRunInNewThread(boolean newValue) {
 		this.runInNewThread = newValue;
+	}
+	
+	protected boolean getRunInNewThread() {
+		return runInNewThread;
+	}
+	
+	protected String getDescription() {
+		return description;
+	}
+	
+	protected String getUsage() {
+		return usage;
+	}
+	
+	protected String[] getAliases() {
+		return aliases;
+	}
+	
+	protected List<CommandHelp> getSubcommandsHelp() {
+		return subcommandsHelp;
+	}
+	
+	protected int getUserType() {
+		return userType;
 	}
 }

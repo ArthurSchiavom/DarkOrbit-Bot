@@ -15,10 +15,6 @@ public class Main extends ListenerAdapter {
 	public static void main(String[] args) {
 		System.out.println("Restarting");
 		Ref.loadRef();
-		runOnNewThread(new RSSFeed.Informer());
-		runOnNewThread(new suggestions.SuggestionTerminator());
-		database.Database.initializeDriver();
-		database.SuggestionTable.loadSuggestionsIdentifiers();
 		
 		try {
 			botAPI = new JDABuilder(AccountType.BOT).setToken(Ref.botToken).buildBlocking();
@@ -37,6 +33,14 @@ public class Main extends ListenerAdapter {
 			System.out.println("Failed to log in the user");
 			e.printStackTrace();
 		}
+		
+		runOnNewThread(new RSSFeed.Informer());
+		runOnNewThread(new suggestions.SuggestionTerminator());
+		database.Database.initializeDriver();
+		database.SuggestionTable.load();
+		database.PMQuestionnaireTable.createTable();
+		database.PMQuestionnaireTable.load();
+		Ref.accSeller.load();
 		
 		System.out.println("Successfully restarted");
 	}

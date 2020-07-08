@@ -1,5 +1,7 @@
 package multiQuestion;
 
+import java.util.List;
+
 import net.dv8tion.jda.core.events.message.priv.PrivateMessageReceivedEvent;
 
 public class User {
@@ -14,11 +16,18 @@ public class User {
 	/**
 	 * Starts a new questionnaire for the given user. Via private messages.<br>
 	 * <b>This will remove current questionnaire, if any, being then irrecoverable.</b>
-	 * @param questionnaire the questionnaire that the user shall be target of
+	 * @param questionnaire the questionnaire that the user shall be target of.
+	 * @param startChannelID the ID of the channel where the request was made.
 	 */
-	protected void startNewQuestionnairePM(Questionnaire questionnaire) {
+	protected void startNewQuestionnairePM(int questionnaireID, Questionnaire questionnaire, long startChannelID) {
 		currentQuestionnairePM = questionnaire;
-		currentQuestionnairePM.start(userID);
+		if (!currentQuestionnairePM.startPM(questionnaireID, userID, startChannelID))
+			currentQuestionnairePM = null;
+	}
+	
+	protected void loadQuestionnairePM(Questionnaire questionnaire, long userID, long startChannelID, List<String> answers) {
+		currentQuestionnairePM = questionnaire;
+		questionnaire.load(userID, startChannelID, answers);
 	}
 	
 	/**

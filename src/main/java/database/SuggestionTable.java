@@ -8,10 +8,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SuggestionTable implements Table {
+public class SuggestionTable {
 	
 	public SuggestionTable() {
 		createTable();
+	}
+
+	/**
+	 * Creates the table in the database if one doesn't exist yet
+	 */
+	public void createTable() {
+		String[] columns = {"channelID bigint", "messageID bigint", "endVoteDate bigint"};
+		Database.createTable(TABLE_NAME, columns);
 	}
 	
 	/**
@@ -27,22 +35,16 @@ public class SuggestionTable implements Table {
 	public List<suggestions.SuggestionIdentifier> getSuggestionsIdentifiers() {
 		return suggestions;
 	}
+
 	
-	@Override
-	/**
-	 * Creates the table in the database if one doesn't exist yet
-	 */
-	public void createTable() {
-		String[] columns = {"channelID bigint", "messageID bigint", "endVoteDate bigint"};
-		Database.createTable(TABLE_NAME, columns);
-	}
 	
 	/**
 	 * Adds, to the database, information about when the voting period for a message will be over
 	 * @param messageID the suggestion message's ID
 	 * @param date the date object representing when the voting period is over
+	 * @param channelID the ID of channel where the suggestion was made
 	 */
-	public void addSuggestionIdentifier(long channelID, long messageID, Date date) {
+	public void add(long channelID, long messageID, Date date) {
 		suggestions.add(new suggestions.SuggestionIdentifier(channelID, messageID, date));
 		
 		Connection conn = Database.getConnection();
@@ -66,7 +68,7 @@ public class SuggestionTable implements Table {
 	 * Loads the database information into the memory for faster access<br>
 	 * Note: this operation must be performed before using the methods to get or remove info from the database
 	 */
-	public static void loadSuggestionsIdentifiers() {
+	public static void load() {
 		Connection conn = Database.getConnection();
 		PreparedStatement statement = null;
 		ResultSet rs = null;
@@ -99,7 +101,7 @@ public class SuggestionTable implements Table {
 	 * Deletes the suggestion information from the memory and from the database
 	 * @param ID the ID of the suggestion message
 	 */
-	public void deleteSuggestionIdentifier(long channelID, long messageID) {
+	public void remove(long channelID, long messageID) {
 		
 		Connection conn = Database.getConnection();
 		PreparedStatement statement = null;

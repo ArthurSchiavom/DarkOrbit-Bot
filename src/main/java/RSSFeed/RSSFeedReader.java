@@ -304,7 +304,7 @@ public class RSSFeedReader {
 			while ((htmlLine = bf.readLine()) != null)
 				htmlCode = htmlCode.append(htmlLine);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			main.ErrorMessenger.inform("Failed to retrieve info from " + url + ". Cannot access the page?");
 			e.printStackTrace();
 		}
 		

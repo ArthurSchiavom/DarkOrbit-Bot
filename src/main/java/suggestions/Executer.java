@@ -40,7 +40,7 @@ public class Executer {
 		
 		Message replyMessage = event.getChannel().sendMessage(reply.build()).complete();
 		
-		database.addSuggestionIdentifier(replyMessage.getChannel().getIdLong(), replyMessage.getIdLong(), getEndVoteDate());
+		database.add(replyMessage.getChannel().getIdLong(), replyMessage.getIdLong(), getEndVoteDate());
 		
 		for (String emote : Ref.reactionEmotes)
 			try {
@@ -112,7 +112,7 @@ public class Executer {
 
 		if (message != null) {
 			try {
-				database.deleteSuggestionIdentifier(channelID, messageID);
+				database.remove(channelID, messageID);
 				message.clearReactions().queue();
 				MessageEmbed embed = message.getEmbeds().get(0);
 				EmbedBuilder newEmbed = new EmbedBuilder();

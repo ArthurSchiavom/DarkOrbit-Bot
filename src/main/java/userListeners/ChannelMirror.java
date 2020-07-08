@@ -6,8 +6,8 @@ import java.util.List;
 import main.Main;
 
 public class ChannelMirror {
-	private List<Long> originChannelsIDs = new ArrayList<>();
-	private List<Long> targetChannelsIDs = new ArrayList<>();
+	private List<Long> originChannelsIDs = new ArrayList<Long>();
+	private List<Long> targetChannelsIDs = new ArrayList<Long>();
 	
 	/**
 	 * Retrives a list with all the target channels' IDs associated to the given origin channel ID

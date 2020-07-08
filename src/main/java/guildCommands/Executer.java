@@ -12,8 +12,8 @@ public class Executer {
 	private Map<String, Command> commands = new HashMap<String, Command>();
 	
 	public Executer() {
-		commands.put("accountselling", new AccountSelling());
 		commands.put("help", new Help());
+		commands.put("accounttrading", new AccountTrading());
 	}
 	
 	public static void addAlias(String alias, String commandName) {
@@ -28,8 +28,25 @@ public class Executer {
 	 */
 	private String checkForAlias(String name) {
 		name = name.toLowerCase();
+		
 		if (commandsAliases.containsKey(name))
-			return commandsAliases.get(name);
+			return commandsAliases.get(name).toLowerCase();
+		else
+			return name;
+	}
+	
+	/**
+	 * Static method, to be used in other classes<br>
+	 * Checks if the given name is the alias of some command and, if so, return that command's name.
+	 * @param name the target of the verification.
+	 * @return if the given name is an alias of a command: the command's name.<br>
+	 * returns the given name otherwise.
+	 */
+	public static String isAlias(String name) {
+		name = name.toLowerCase();
+		
+		if (commandsAliases.containsKey(name))
+			return commandsAliases.get(name).toLowerCase();
 		else
 			return name;
 	}
@@ -44,4 +61,5 @@ public class Executer {
 		if (commands.containsKey(commandName))
 			commands.get(commandName).execute(event);
 	}
+	
 }
