@@ -1,0 +1,76 @@
+BotToken = token
+UserToken = token
+
+CommandsPrefix = !
+
+| Database information
+DatabaseURL = url
+DatabaseName = name
+DatabaseUsername = username
+DatabasePassword = password
+
+| Adds mirror channels: messages sent on origin channels will be copied over to the target channels
+| Specify the channels IDs as shown below. Unlimited amount
+AddMirror = origin,target
+
+| Sets the channels on which the bot should react to all (and any) messages. Unlimited amount.
+AddSuggestionChannel = ID
+
+| How long, in hours, until the poll is close
+SuggestionVotingDuration = duration
+
+| Defines the emotes that the bot should react with when a message is sent on any reaction channel. Unlimited amount.
+AddEmote = EmoteName
+
+| Adds a new feed to be tracked and associates it with the channel where users should be informed. Unlimited amount.
+AddRSSFeed = URL,DiscordChannel
+
+| Defines which channel the bot should send error messages to, should any happen. This setting is optional, however, it is recommended to set one.
+ErrorChannel = ID
+
+
+| ALL THE OPTIONS BELOW ARE OPTIONAL
+| ALL THE OPTIONS BELOW ARE OPTIONAL
+| ALL THE OPTIONS BELOW ARE OPTIONAL
+| ALL THE OPTIONS BELOW ARE OPTIONAL
+| ALL THE OPTIONS BELOW ARE OPTIONAL
+
+| Sets the game that the bot will display as playing in Discord.
+Game = Whatever you wish
+
+| Provides access to owner commands
+| AddOwner = ID
+
+| Provides access to admin commands
+| AddAdmin = ID
+
+| FeedEmbedColor default is #2CF68A. HexCode example: #2CF68A.
+| FeedEmbedColor = HexCode
+
+| Use http or https format!!! FeedEmbedFooterImageUrl default is https://farm1.staticflickr.com/913/42604112564_b33988c838_o_d.png
+| FeedEmbedFooterImageUrl = url
+
+| Url of the image that will be displayed on the feed embedded messages top right corner.
+| Default is https://farm2.staticflickr.com/1802/42415695115_87f8b92cde_o_d.png.
+| DarkOrbitLogoUrl = Url
+| Default: https://farm2.staticflickr.com/1767/41768637170_cb1ac31821_o_d.png.
+| SeafightLogoUrl = Url
+| Default: https://farm2.staticflickr.com/1821/41768636670_1d320c348f_o_d.png.
+| PiratestormLogoUrl = Url
+| Default: https://farm1.staticflickr.com/936/41768636050_6bfb51df8d_o_d.png.
+| LeagueOfAngelsLogoUrl = Url
+| Default: https://farm2.staticflickr.com/1766/42859015954_98a11694eb_o_d.png.
+| DrakensangLogoUrl = Url
+| Default: https://farm1.staticflickr.com/942/42671704685_20f6d2ffb2_o_d.png.
+| GalacticaLogoUrl = Url
+
+| SuggestionEmbedColor default is #2CF68A. HexCode example: #2CF68A.
+| SuggestionEmbedColor = HexCode
+
+| Defaults to: #2CF68A. HexCode example: #2CF68A.
+| helpmessageembedcolor = HexCode
+| Defaults to: https://c1.staticflickr.com/1/858/43641846732_0096c5df33_m_d.jpg
+| helpmessageembedfooterimageurl = Url
+
+| Use http or https format!!! Adds a the specified image to the poll embed as a thumbnail.
+| VotingEmbedThumbnail = Url
