@@ -24,4 +24,4 @@ Este sistema ficou incompleto quando o projeto foi abandonado. Ficou implementad
 
 ## Tecnologias/Frameworks Utilizadas
 
-Java, Maven, JDBC, MySQL, HTML, XML e Jsoup.
+Java, Maven, JDBC, MySQL, HTML, XML, W3C DOM Parser e Jsoup.
