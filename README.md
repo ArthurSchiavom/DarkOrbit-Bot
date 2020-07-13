@@ -1,4 +1,4 @@
-# Unnoficial DarkOrbit Bot
+# DarkOrbit Bot
 
 Bot feito para facilitar a gestão do servidor de Discord não oficial do jogo DarkOrbit. Este servidor já não está ativo.
 
